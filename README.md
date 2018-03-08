@@ -3,11 +3,11 @@
 ### Modify the following code to use var, const, and let appropriately. Replace the underlines with either 'var', 'const', or 'let'
 
 ```js
-____ SPEED_OF_LIGHT = 299792458
+const SPEED_OF_LIGHT = 299792458
 
-____ speedArray = [55, 9.8, 1000000000, 186300]
+var speedArray = [55, 9.8, 1000000000, 186300]
 
-for (____ i = 0; i < speedArray.length; i++) {
+for (let i = 0; i < speedArray.length; i++) {
   if (speedArray[i] > SPEED_OF_LIGHT) {
     console.log("Faster than light")
   } else {
@@ -18,11 +18,12 @@ for (____ i = 0; i < speedArray.length; i++) {
 
 ### What errors will the following code blocks produce? Why?
 
-```js
+```js - ANSWER: We are trying to change the value of a constant which is immutable! ninja turtles
 const foo = 5;
 foo = 6;
 ```
-```js
+
+```js - ANSWER: Will error on console.log(bar) because it only exists in the if code block
 var foo = 5;
 if (foo > 3) {
   let bar = 2;
@@ -37,12 +38,13 @@ const farge = {
   prop2: "two",
   prop3: "three"
 }
-farge = {newProp: "new"};  // Error?
-farge.prop1 = "forty-two"; // Error?
-farge.propX = "ex";        // Error?
-delete farge.propX;        // Error?
+farge = {newProp: "new"};  // ANSWER: ERROR! - trying to assign new value to a constnat
+farge.prop1 = "forty-two"; // ANSWER: No Error - can alter a object value even with const
+farge.propX = "ex";        // ANSWER: No Error - will add new property to farge
+delete farge.propX;        // ANSWER: No Error - allowed to alter object
 console.log(farge);
 ```
+
 
 ### Rewrite the following functions using arrow functions
 
@@ -50,11 +52,17 @@ console.log(farge);
 var adder = function(a, b) {
   return a + b;
 }
+
+ANSWER: adder = (a, b) => a + b
+
 ```
 ```js
 function printFarge() {
   console.log('farge');
 }
+
+ANSWER: printFarge = () => console.log('farge')
+
 ```
 ```js
 var cleanTheString = function(str) {
@@ -62,6 +70,13 @@ var cleanTheString = function(str) {
   newStr = newStr.toUpperCase();
   return newStr;
 }
+
+ANSWER: cleanTheString = (str) => {
+  let newStr = str.replace(/\s/g, '')
+  newStr = newStr.toUpperCase();
+  return newStr;
+}
+
 ```
 
 ### Use Object Literal shorthand to clean up the following code
@@ -72,9 +87,9 @@ var length = 14;
 var style = "Flamenco";
 
 var widget = {
-  color: color,
-  length: length,
-  style: style
+  color,
+  length,
+  style
 }
 ```
 
@@ -85,7 +100,7 @@ var name = "Paco";
 var location = "Nogales";
 var food = "steak";
 
-var bio = name + " is from " + location + " and really likes to eat " + food;
+var bio = `${name} is from ${location} and really likes to eat ${food1}`;
 ```
 
 ### The blocks below represent two separate files. Write out the statements needed to use the function from the first file in the code in the second file
@@ -95,12 +110,12 @@ var bio = name + " is from " + location + " and really likes to eat " + food;
 var hello = function(name) {
   console.log(`Hello, ${name}!`);
 }
-// Add your code here...
+export default hello
 
 ```
 ```js
 // This is in main.js
-// Add your code here...
+import hello from './hello'
 
 hello("Siouxsie");
 ```
